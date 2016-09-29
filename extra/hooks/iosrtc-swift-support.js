@@ -12,6 +12,8 @@ var
 
 	BUILD_VERSION = '9.2',
 	BUILD_VERSION_XCODE = '"' + BUILD_VERSION + '"',
+	SWIFT_VERSION = '2.3',
+	SWIFT_VERSION_XCODE = '"' + SWIFT_VERSION + '"',
 	RUNPATH_SEARCH_PATHS = '@executable_path/Frameworks',
 	RUNPATH_SEARCH_PATHS_XCODE = '"' + RUNPATH_SEARCH_PATHS + '"',
 	ENABLE_BITCODE = 'NO',
@@ -82,6 +84,7 @@ module.exports = function (context) {
 	// Showing info about the tasks to do
 	debug('fixing issues in the generated project files:');
 	debug('- "iOS Deployment Target" and "Deployment Target" to: ' + BUILD_VERSION_XCODE);
+	debug('- "SWIFT_VERSION" (Support Legacy Swift) to: ' + SWIFT_VERSION_XCODE);
 	debug('- "Runpath Search Paths" to: ' + RUNPATH_SEARCH_PATHS_XCODE);
 	debug('- "Objective-C Bridging Header" to: ' + swiftBridgingHeadXcode);
 	debug('- "ENABLE_BITCODE" set to: ' + ENABLE_BITCODE_XCODE);
@@ -93,6 +96,7 @@ module.exports = function (context) {
 	swiftOptions.push('LD_RUNPATH_SEARCH_PATHS = ' + RUNPATH_SEARCH_PATHS);
 	swiftOptions.push('SWIFT_OBJC_BRIDGING_HEADER = ' + swiftBridgingHead);
 	swiftOptions.push('IPHONEOS_DEPLOYMENT_TARGET = ' + BUILD_VERSION);
+	swiftOptions.push('SWIFT_VERSION = ' + SWIFT_VERSION);
 	swiftOptions.push('ENABLE_BITCODE = ' + ENABLE_BITCODE);
 	// NOTE: Not needed
 	// swiftOptions.push('EMBEDDED_CONTENT_CONTAINS_SWIFT = YES');
@@ -118,6 +122,7 @@ module.exports = function (context) {
 			buildSettings.LD_RUNPATH_SEARCH_PATHS = RUNPATH_SEARCH_PATHS_XCODE;
 			buildSettings.SWIFT_OBJC_BRIDGING_HEADER = swiftBridgingHeadXcode;
 			buildSettings.IPHONEOS_DEPLOYMENT_TARGET = BUILD_VERSION_XCODE;
+			buildSettings.SWIFT_VERSION = SWIFT_VERSION_XCODE;
 			buildSettings.ENABLE_BITCODE = ENABLE_BITCODE_XCODE;
 		});
 
